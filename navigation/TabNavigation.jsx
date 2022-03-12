@@ -6,6 +6,7 @@ import RestaurantScreen from "../screens/RestaurantsScreen";
 import MapScreen from "../screens/MapScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import { Ionicons } from "@expo/vector-icons";
+import StackNavigation from "./StackNavigation";
 
 
 
@@ -21,7 +22,7 @@ const TabNavigation = () => {
       >
         <BottomNavigator.Screen
           name="Restaurants"
-          component={RestaurantScreen}
+          component={StackNavigation}
           options={{
             tabBarIcon: ({ color, focused }) => (
               <Ionicons

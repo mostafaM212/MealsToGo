@@ -4,7 +4,7 @@ import { SvgXml } from "react-native-svg";
 import star from "../../assets/svg/star";
 import open from "../../assets/svg/open";
 import Text from "../UI/Text";
-import { Card, Paragraph, Button, Avatar } from "react-native-paper";
+import { TouchableNativeFeedback } from "react-native";
 
 import {
   Address,
@@ -15,7 +15,7 @@ import {
   StyledCover,
 } from "./RestaurantInfoCardStyle";
 
-const RestaurantInfoCard = ({ restaurant = {} }) => {
+const RestaurantInfoCard = (props) => {
   let {
     name = "Some Restaurant",
     icon,
@@ -26,30 +26,31 @@ const RestaurantInfoCard = ({ restaurant = {} }) => {
     isOpenNow = false,
     rating = 4,
     isClosedTemporarily,
-  } = restaurant;
-
+  } = props.restaurant;
+  
   let rattingArray = Array.from(new Array(Math.floor(rating)));
 
   return (
-    <StyledCard elevation={5}>
-      <StyledCover key={name} source={{ uri: photos[0] }} />
-      <Info>
-        <Text variant={"label"}>{name}</Text>
-        <SVGContainer>
-          <RatingRow>
-            {rattingArray.map((e, index) => (
-              <SvgXml xml={star} width={20} height={20} key={index} />
-            ))}
-          </RatingRow>
-          {isOpenNow ? (
-            <SvgXml xml={open} width={20} height={20} />
-          ) : (
-            <Text variant="caption">CLOSED TEMPORARILY</Text>
-          )}
-        </SVGContainer>
-        <Address>{address}</Address>
-      </Info>
-    </StyledCard>
+    <TouchableNativeFeedback onPress={()=>props.navigate({ name : 'RestaurantInfo'})} >
+      <StyledCard elevation={5}>
+        <StyledCover key={name} source={{ uri: photos[0] }} />
+        <Info>
+          <Text variant={"label"}>{name}</Text>
+          <SVGContainer>
+            <RatingRow>
+              {rattingArray.map((e, index) => (
+                <SvgXml xml={star} width={20} height={20} key={index} />
+              ))}
+            </RatingRow>
+            {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+            {isClosedTemporarily && (
+              <Text variant="caption">CLOSED TEMPORARILY</Text>
+            )}
+          </SVGContainer>
+          <Address>{address}</Address>
+        </Info>
+      </StyledCard>
+    </TouchableNativeFeedback>
   );
 };
 RestaurantInfoCard.propTypes = {

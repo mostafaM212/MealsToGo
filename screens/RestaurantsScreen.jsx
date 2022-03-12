@@ -1,48 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FlatList } from "react-native";
 import RestaurantInfoCard from "../components/restaurants/RestaurantInfoCard";
+import { RestaurantsContext } from "../services/restaurants/restaurantsContext";
 import {
   RestaurantScreenBody,
   RestaurantScreenContainer,
-  StyledSearchBar,
+  ActivityIndicatorContainer,
 } from "./RestaurantsScreenStyles";
-const RestaurantsScreen = (props) => {
-  const [searchQuery, setSearchQuery] = useState("");
+import { ActivityIndicator, Colors } from "react-native-paper";
+import Search from "../components/UI/Search";
 
+
+
+const RestaurantsScreen = (props) => {
+ 
+  const { restaurants, isLoading } = useContext(RestaurantsContext);
+  
+  
   return (
     <RestaurantScreenContainer>
-      <StyledSearchBar
-        placeholder="Search"
-        onChangeText={(text) => setSearchQuery(text)}
-        value={searchQuery}
-      />
+      <Search/>
       <RestaurantScreenBody>
-        <FlatList
-          data={[
-            {name : 1},
-            {name : 2},
-            {name : 3},
-            {name : 4}, 
-            {name : 5}, 
-            {name : 6}, 
-            {name : 7}, 
-            {name : 8},
-            {name : 9},
-            {name : 10}, 
-            {name : 11}, 
-            {name : 12}, 
-            {name : 13}, 
-            {name : 14}, 
-          ]}
-          keyExtractor={(e, index) => e.name}
-          style={{padding : 16}}
-          renderItem={data => (
-            <RestaurantInfoCard  />
-          )}
-        />
-        
+        {!isLoading ? (
+          <ActivityIndicatorContainer>
+            <ActivityIndicator
+              size={50}
+              color={Colors.blue300}
+              animating={true}
+            />
+          </ActivityIndicatorContainer>
+        ) : (
+          <FlatList
+            data={restaurants}
+            keyExtractor={(e, index) => index}
+            style={{ padding: 4 }}
+            renderItem={(data) => <RestaurantInfoCard restaurant={data.item} navigate = {props.navigation.navigate} />}
+          />
+        )}
       </RestaurantScreenBody>
     </RestaurantScreenContainer>
   );
 };
-export default RestaurantsScreen;
+export default React.memo(RestaurantsScreen);

@@ -18,12 +18,11 @@ export const RestaurantScreenBody = styled.View`
   width: 100%;
   
 `;
-export const StyledSearchBar = styled(Searchbar)`
-  margin-top: ${StatusBar.currentHeight}px;
-  width: 100%;
-  flex: 1;
-  border-width: 0;
-  elevation: 0;
-`;
 
+
+export const ActivityIndicatorContainer = styled.View`
+  flex :  1;
+  align-items: center;
+  justify-content: center;
+`;
  
