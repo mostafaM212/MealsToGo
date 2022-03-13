@@ -31,8 +31,15 @@ const RestaurantInfoCard = (props) => {
   let rattingArray = Array.from(new Array(Math.floor(rating)));
 
   return (
-    <TouchableNativeFeedback onPress={()=>props.navigate({ name : 'RestaurantInfo'})} >
-      <StyledCard elevation={5}>
+    <TouchableNativeFeedback onPress={() => {
+      if (props.routeName=== 'Home') {
+        props.navigate({
+          name: 'RestaurantInfo', params: {
+          restaurant : props.restaurant
+        }})
+      }
+    }} >
+      <StyledCard>
         <StyledCover key={name} source={{ uri: photos[0] }} />
         <Info>
           <Text variant={"label"}>{name}</Text>

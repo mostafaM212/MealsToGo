@@ -10,16 +10,13 @@ import {
 import { ActivityIndicator, Colors } from "react-native-paper";
 import Search from "../components/UI/Search";
 
-
-
 const RestaurantsScreen = (props) => {
- 
   const { restaurants, isLoading } = useContext(RestaurantsContext);
-  
+
   
   return (
     <RestaurantScreenContainer>
-      <Search/>
+      <Search />
       <RestaurantScreenBody>
         {!isLoading ? (
           <ActivityIndicatorContainer>
@@ -34,7 +31,13 @@ const RestaurantsScreen = (props) => {
             data={restaurants}
             keyExtractor={(e, index) => index}
             style={{ padding: 4 }}
-            renderItem={(data) => <RestaurantInfoCard restaurant={data.item} navigate = {props.navigation.navigate} />}
+            renderItem={(data) => (
+              <RestaurantInfoCard
+                restaurant={data.item}
+                navigate={props.navigation.navigate}
+                routeName={props.route.name} 
+              />
+            )}
           />
         )}
       </RestaurantScreenBody>
