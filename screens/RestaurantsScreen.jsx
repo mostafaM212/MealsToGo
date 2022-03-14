@@ -18,7 +18,7 @@ const RestaurantsScreen = (props) => {
     <RestaurantScreenContainer>
       <Search />
       <RestaurantScreenBody>
-        {!isLoading ? (
+        {isLoading ? (
           <ActivityIndicatorContainer>
             <ActivityIndicator
               size={50}

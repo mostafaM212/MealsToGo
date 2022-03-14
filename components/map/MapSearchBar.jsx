@@ -1,34 +1,39 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
-import React, { useState, useContext ,useEffect} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Searchbar } from "react-native-paper";
 import styled from "styled-components";
 import { LocationContext } from "../../services/location/locationContext";
 
 const StyledSearchBar = styled(Searchbar)`
-  margin-top: ${StatusBar.currentHeight}px;
-  width: 100%;
-  flex: 1;
+  top: ${StatusBar.currentHeight + 10}px;
+  width: 80%;
+  position: absolute;
   border-width: 0;
-  elevation: 0;
+  z-index: 91;
+  left: 10%;
+  border-radius: 10px;
+  padding: 3px;
 `;
 
-const Search = (props) => {
-  const { keyword , search } = useContext(LocationContext);
-  const [searchQuery, setSearchQuery] = useState(keyword)
-  
-  
+const MapSearchBar = (props) => {
+  const { keyword, search } = useContext(LocationContext);
+
+  const [searchQuery, setSearchQuery] = useState(keyword);
+
+    
   return (
     <StyledSearchBar
       placeholder="Search for Location"
       onChangeText={(text) => setSearchQuery(text)}
       value={searchQuery}
-      onSubmitEditing={(text) => {
-        search(searchQuery);
+      icon="map"
+      onSubmitEditing={(e) => {
+        search(searchQuery)
       }}
     />
   );
 };
 
-export default Search;
+export default MapSearchBar;
 
 const styles = StyleSheet.create({});

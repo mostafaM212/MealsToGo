@@ -2,13 +2,13 @@ import { locations } from "./locationMock";
 import camelize from 'camelize';
 
 
-export const locationRequest = (searchQuery)=>{
+export const locationRequest = (searchQuery='')=>{
 
     return new Promise((resolve, reject) => {
         
-        const locationMock = locations[searchQuery]
+        const locationMock = locations[searchQuery.toLowerCase()]
 
-        if (locationMock.status !== 'OK') {
+        if (!locationMock) {
             console.log('error context')
             reject('NOT Found')
         }
@@ -23,5 +23,5 @@ export const locationTransform = (result) => {
     
     const { lat, lng } = geometry.location;
 
-    return { lat, lng };
+    return { lat, lng ,viewport : geometry.viewport};
 }

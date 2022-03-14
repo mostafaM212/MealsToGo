@@ -1,13 +1,18 @@
-import { mocks , mockImages } from './mock/index';
+import { mocks , mockImages, mapMocksLocations } from './mock/index';
 import camelize from 'camelize'
 
-export const restaurantsRequest = (location = "37.7749295,-122.4194155") => {
-    
 
+export const restaurantsRequest = (location = "san_francisco") => {
+    
+    location = location.toLocaleLowerCase();
+
+    if (location === 'san francisco') {
+        location = 'san_francisco';
+    }
     return new Promise((resolve, reject) => {
         
 
-        const mock = restaurantsTransform(mocks[location]);
+        const mock = restaurantsTransform(mocks[mapMocksLocations[location]]);
         if (!mock) { 
             reject("Not Found")
         }

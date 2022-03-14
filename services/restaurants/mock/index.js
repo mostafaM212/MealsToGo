@@ -19,3 +19,13 @@ export const mockImages = [
   "https://www.foodiesfeed.com/wp-content/uploads/2019/02/messy-pizza-on-a-black-table-600x400.jpg",
   "https://www.foodiesfeed.com/wp-content/uploads/2019/02/pizza-ready-for-baking-600x400.jpg",
 ];
+
+
+export const mapMocksLocations =  {
+
+    'antwerp': "51.219448,4.402464",
+    'toronto': '43.653225,-79.383186',
+    'chicago': '41.878113,-87.629799',
+    'san_francisco' : '37.7749295,-122.4194155'
+  }
+
