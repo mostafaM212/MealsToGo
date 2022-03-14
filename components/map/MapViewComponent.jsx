@@ -1,44 +1,45 @@
 import { StyleSheet, Text, View } from "react-native";
-import MapView from "react-native-maps";
-import React , { useState , useContext , useEffect} from "react";
-import {RestaurantsContext} from "../../services/restaurants/restaurantsContext";
-import { LocationContext } from '../../services/location/locationContext'
-
+import MapView, { Marker , Callout} from "react-native-maps";
+import React, { useState, useContext, useEffect } from "react";
+import { RestaurantsContext } from "../../services/restaurants/restaurantsContext";
+import { LocationContext } from "../../services/location/locationContext";
 
 const MapViewComponent = () => {
-
-  const { restaurants = []} = useContext(RestaurantsContext)
-  const  { location  }  = useContext(LocationContext)
+  const { restaurants = [] } = useContext(RestaurantsContext);
+  const { location } = useContext(LocationContext);
   const [latDelta, setLatDelta] = useState(0);
-  const {viewport } = location.results[0].geometry
-  
-  const {lat , lng} = location.results[0].geometry.location
+  const { viewport } = location.results[0].geometry;
+
+  const { lat, lng } = location.results[0].geometry.location;
   useEffect(() => {
-    
-    
     const northeastLat = viewport.northeast.lat;
     const southwestLat = viewport.southwest.lat;
 
     const latDelta = northeastLat - southwestLat;
-    setLatDelta(latDelta)
-   }, [location , viewport])
-  
+    setLatDelta(latDelta);
+  }, [location, viewport]);
+
   return (
     <MapView
-        region={{
-          latitude: lat,
-          longitude: lng,
-          latitudeDelta: latDelta,
-          longitudeDelta: 0.02,
-        }}
-        style={{flex : 1 , zIndex : 1}}
+      region={{
+        latitude: lat,
+        longitude: lng,
+        latitudeDelta: latDelta,
+        longitudeDelta: 0.02,
+      }}
+      style={{ flex: 1, zIndex: 1 }}
     >
-      {
-        restaurants.map((restaurant, index) => null)
-      }
-    
+      {restaurants.map((restaurant, index) => (
+        <Marker key={restaurant.name}
+          title={restaurant.name}
+          coordinate={{
+            latitude: restaurant.geometry.location.lat,
+            longitude : restaurant.geometry.location.lng
+          }}
+        />
+      ))}
     </MapView>
-  )
+  );
 };
 
 export default MapViewComponent;

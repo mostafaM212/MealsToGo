@@ -6,10 +6,12 @@ import { Card, Paragraph, Button, Avatar } from "react-native-paper";
 
 export const StyledCard = styled(Card)`
   background-color: ${(props) => props.theme.colors.bg.primary};
+  z-index : 2;
 `;
 export const StyledCover = styled(Card.Cover)`
   padding: ${(props) => props.theme.space[3]};
   background-color: white;
+  z-index : 1;
 `;
 
 export const Info = styled.View`
