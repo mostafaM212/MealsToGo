@@ -14,6 +14,8 @@ import {
   StyledCard,
   StyledCover,
 } from "./RestaurantInfoCardStyle";
+import FavoritesButton from "../UI/FavoritesButton";
+import { View } from "react-native";
 
 const RestaurantInfoCard = (props) => {
   let {
@@ -27,20 +29,27 @@ const RestaurantInfoCard = (props) => {
     rating = 4,
     isClosedTemporarily,
   } = props.restaurant;
-  
+
   let rattingArray = Array.from(new Array(Math.floor(rating)));
 
   return (
-    <TouchableNativeFeedback onPress={() => {
-      if (props.routeName=== 'Home') {
-        props.navigate({
-          name: 'RestaurantInfo', params: {
-          restaurant : props.restaurant
-        }})
-      }
-    }} >
+    <TouchableNativeFeedback
+      onPress={() => {
+        if (props.routeName === "Home") {
+          props.navigate({
+            name: "RestaurantInfo",
+            params: {
+              restaurant: props.restaurant,
+            },
+          });
+        }
+      }}
+    >
       <StyledCard>
-        <StyledCover key={name} source={{ uri: photos[0] }} />
+        <View>
+          <FavoritesButton restaurant={props.restaurant} />
+          <StyledCover key={name} source={{ uri: photos[0] }} />
+        </View>
         <Info>
           <Text variant={"label"}>{name}</Text>
           <SVGContainer>

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import MapViewComponent from '../components/map/MapViewComponent';
 import MapSearchBar from '../components/map/MapSearchBar';
@@ -12,6 +12,8 @@ const MapContainer = styled.View`
 
 
 const MapScreen = (props) => {
+
+  
   return (
     <MapContainer>
       <MapSearchBar />
@@ -20,6 +22,4 @@ const MapScreen = (props) => {
   )
 }
 
-export default MapScreen
-
-const styles = StyleSheet.create({})
+export default MapScreen;
