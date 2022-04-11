@@ -8,58 +8,51 @@ import SettingsScreen from "../screens/SettingsScreen";
 import { Ionicons } from "@expo/vector-icons";
 import StackNavigation from "./StackNavigation";
 
-
-
 const TabNavigation = () => {
   const BottomNavigator = createMaterialBottomTabNavigator();
   return (
-    <NavigationContainer>
-      <BottomNavigator.Navigator
-              activeColor="tomato"
-              inactiveColor="gray"
-              barStyle={{ backgroundColor: "white" }}
-              labeled={false}
-      >
-        <BottomNavigator.Screen
-          name="Restaurants"
-          component={StackNavigation}
-          options={{
-            tabBarIcon: ({ color, focused }) => (
-              <Ionicons
-                name="md-restaurant"
-                size={focused ? 25 : 20}
-                color={color}
-              />
-            ),
-          }}
-        />
-        <BottomNavigator.Screen
-          name="Map"
-          component={MapScreen}
-          options={{
-            tabBarIcon: ({ color, focused }) => (
-                  <Ionicons name="map"
-                      size={focused ? 25 : 20}
-                      color={color}
-                  />
-            ),
-          }}
-        />
-        <BottomNavigator.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={{
-            tabBarIcon: ({ color, focused }) => (
-              <Ionicons
-                name="md-settings"
-                size={focused ? 25 : 20}
-                color={color}
-              />
-            ),
-          }}
-        />
-      </BottomNavigator.Navigator>
-    </NavigationContainer>
+    <BottomNavigator.Navigator
+      activeColor="tomato"
+      inactiveColor="gray"
+      barStyle={{ backgroundColor: "white" }}
+      labeled={false}
+    >
+      <BottomNavigator.Screen
+        name="Restaurants"
+        component={StackNavigation}
+        options={{
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name="md-restaurant"
+              size={focused ? 25 : 20}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <BottomNavigator.Screen
+        name="Map"
+        component={MapScreen}
+        options={{
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name="map" size={focused ? 25 : 20} color={color} />
+          ),
+        }}
+      />
+      <BottomNavigator.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name="md-settings"
+              size={focused ? 25 : 20}
+              color={color}
+            />
+          ),
+        }}
+      />
+    </BottomNavigator.Navigator>
   );
 };
 

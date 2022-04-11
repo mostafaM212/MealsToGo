@@ -6,35 +6,21 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
-import TabNavigation from "./navigation/TabNavigation";
+import MainNavigator from "./navigation/MainNavigator";
 import { restaurantsRequest } from "./services/restaurants/restaurantsService";
 import RestaurantsContextProvider from "./services/restaurants/restaurantsContext";
 import { LocationContextProvider } from "./services/location/locationContext";
 import { FavoritesContextProvider } from "./services/favorites/FavoritesContext";
 import { initializeFireBase } from "./firebase/InitializeFireBase";
-import React, { useEffect, useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import React, {  useState } from "react";
+import { AuthenticationContextProvider } from "./services/authentication/AuthenticationContext";
+
 
 initializeFireBase();
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  useEffect(() => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, 'admin@admin.com', 'testApp')
-      .then((user) => {
-        // Signed in
-        
-        setIsAuthenticated(true)
-        console.log(user)
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode , errorMessage)
-      });
-  }, []);
+
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
@@ -46,18 +32,18 @@ export default function App() {
   if (!oswaldLoaded || !latoLoaded) {
     return null;
   }
-  const restaurants = restaurantsRequest().then((data) => data);
 
-  
   return (
     <ThemeProvider theme={theme}>
-      <FavoritesContextProvider>
-        <LocationContextProvider>
-          <RestaurantsContextProvider>
-            <TabNavigation />
-          </RestaurantsContextProvider>
-        </LocationContextProvider>
-      </FavoritesContextProvider>
+      <AuthenticationContextProvider>
+        <FavoritesContextProvider>
+          <LocationContextProvider>
+            <RestaurantsContextProvider>
+              <MainNavigator />
+            </RestaurantsContextProvider>
+          </LocationContextProvider>
+        </FavoritesContextProvider>
+      </AuthenticationContextProvider>
     </ThemeProvider>
   );
 }
