@@ -11,6 +11,7 @@ import { ActivityIndicator, Colors } from "react-native-paper";
 import Search from "../components/UI/Search";
 import { FavoritesContext } from "../services/favorites/FavoritesContext";
 import FavoritesBar from "../components/favorites/FavoritesBar";
+import FadeAnimation from "../animations/FadeAnimation";
 
 const RestaurantsScreen = (props) => {
   const { restaurants, isLoading } = useContext(RestaurantsContext);
@@ -36,18 +37,20 @@ const RestaurantsScreen = (props) => {
             />
           </ActivityIndicatorContainer>
         ) : (
-          <FlatList
-            data={restaurants}
-            keyExtractor={(e, index) => index}
-            style={{ padding: 4 }}
-            renderItem={(data) => (
-              <RestaurantInfoCard
-                restaurant={data.item}
-                navigate={props.navigation.navigate}
-                routeName={props.route.name}
-              />
-            )}
-          />
+          <FadeAnimation>
+            <FlatList
+              data={restaurants}
+              keyExtractor={(e, index) => index}
+              style={{ padding: 4 }}
+              renderItem={(data) => (
+                <RestaurantInfoCard
+                  restaurant={data.item}
+                  navigate={props.navigation.navigate}
+                  routeName={props.route.name}
+                />
+              )}
+            />
+          </FadeAnimation>
         )}
       </RestaurantScreenBody>
     </RestaurantScreenContainer>

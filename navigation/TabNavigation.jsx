@@ -7,6 +7,7 @@ import MapScreen from "../screens/MapScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import { Ionicons } from "@expo/vector-icons";
 import StackNavigation from "./StackNavigation";
+import SettingsNavigation from "./SettingsNavigation";
 
 const TabNavigation = () => {
   const BottomNavigator = createMaterialBottomTabNavigator();
@@ -28,6 +29,7 @@ const TabNavigation = () => {
               color={color}
             />
           ),
+          
         }}
       />
       <BottomNavigator.Screen
@@ -41,7 +43,7 @@ const TabNavigation = () => {
       />
       <BottomNavigator.Screen
         name="Settings"
-        component={SettingsScreen}
+        component={SettingsNavigation}
         options={{
           tabBarIcon: ({ color, focused }) => (
             <Ionicons

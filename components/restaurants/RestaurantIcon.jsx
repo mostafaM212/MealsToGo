@@ -31,7 +31,7 @@ const RestaurantIcon = ({ restaurant, navigate }) => {
     })}>
       <RestaurantIconContainer>
         <Cover key={restaurant.name} source={{ uri: restaurant.photos[0] }} />
-        <Text style={{ textAlign: "center" }} >{restaurant.name}</Text>
+        <Text style={{ textAlign: "center" , fontSize : 10}} numberOfLines={1}>{restaurant.name}</Text>
       </RestaurantIconContainer>
     </TouchableNativeFeedback>
   );

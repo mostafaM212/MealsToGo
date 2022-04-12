@@ -4,18 +4,28 @@ import {
   AccountBackground,
   AccountCover,
   AccountContainer,
-    AuthButton,
-    AuthTitle
+  AuthButton,
+  AuthTitle,
+  AnimationContainer,
 } from "../../components/UI/BackgroundAccount.js";
 import { colors } from "../../infrastructure/theme/colors.js";
+import LottieView from "lottie-react-native";
 
 const AccountScreen = (props) => {
   return (
     <AccountBackground>
-          <AccountCover />
-          <AuthTitle>Meals To Go</AuthTitle>
-          <AccountContainer>
-              
+      <AccountCover />
+      <AnimationContainer>
+        <LottieView
+          key={"animation"}
+          autoPlay
+          loop
+          resizeMode="cover"
+          source={require("../../assets/watermelon.json")}
+        />
+      </AnimationContainer>
+      <AuthTitle>Meals To Go</AuthTitle>
+      <AccountContainer>
         <AuthButton
           color={colors.brand.primary}
           icon="lock-open-outline"

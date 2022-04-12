@@ -3,6 +3,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { Alert } from "react-native";
 export const AuthenticationContext = createContext([]);
@@ -82,6 +83,29 @@ export const AuthenticationContextProvider = (props) => {
       ]);
     }
   };
+  const onLogout = async () => {
+    const auth = getAuth();
+    await signOut(auth)
+      .then((res) => {
+        setIsAuthenticated(false);
+      })
+      .catch((e) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setIsLoading(false);
+        console.log(error);
+        setError({
+          errorCode,
+          errorMessage,
+        });
+        Alert.alert("Invalid Data", errorCode, [
+          {
+            text: "Ok",
+            onPress: () => null,
+          },
+        ]);
+      });
+  };
   return (
     <AuthenticationContext.Provider
       value={{
@@ -91,6 +115,7 @@ export const AuthenticationContextProvider = (props) => {
         isLoading: isLoading,
         onLogin: onLogin,
         onRegister: onRegister,
+        onLogout: onLogout,
       }}
     >
       {props.children}

@@ -36,12 +36,20 @@ export const AuthTextInput = styled(TextInput).attrs({
     mode: 'outlined'
 })`;
     width : ${Dimensions.get('screen').width * .5};
-    height : 50px;
-    font-size : 15px;
-    color : ${colors.brand.primary}
+    
+    font-size : 10px;
+    color : ${colors.brand.primary};
+    padding: 0px
 `;
 
 export const AuthTitle = styled(Text)`  font-size : 30px ;
-  color : ${colors.brand.primary}
+  color : ${colors.brand.primary};
+  font-weight : bold ;
 `;
 
+export const AnimationContainer = styled.View`
+    width : 100% ;
+    height : 50% ;
+    position :absolute;
+    top : ${Dimensions.get('window').height * .01}
+`

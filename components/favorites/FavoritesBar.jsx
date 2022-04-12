@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView ,Dimensions} from "react-native";
 import React, { useContext } from "react";
 import styled from "styled-components";
 import propTypes from "prop-types";
@@ -6,14 +6,14 @@ import RestaurantIcon from "../restaurants/RestaurantIcon";
 
 const FavoritesBarContainer = styled.View`
   width: 100%;
-  height: 120px;
+  height: ${Dimensions.get('window').height * .17};
   padding: 0px 10px 10px 10px;
 `;
 
 const FavoritesBar = ({ favorites, navigate }) => {
   return (
     <FavoritesBarContainer>
-      <Text style={{ textAlign: "center", fontSize: 15 }}>Favorites</Text>
+      <Text style={{ textAlign: "center", fontSize: 15 }} >Favorites</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {favorites.map((res) => (
           <RestaurantIcon key={res.name} restaurant={res} navigate={navigate} />
