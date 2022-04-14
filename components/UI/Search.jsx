@@ -48,6 +48,7 @@ const Search = (props) => {
       iconColor={IsFavorite ? "red" : "gray"}
       onIconPress={onSearchFavoritePressHandler}
       onSubmitEditing={(text) => {
+        console.log(searchQuery , 'bar')
         search(searchQuery);
       }}
     />

@@ -17,7 +17,7 @@ const RestaurantsScreen = (props) => {
   const { restaurants, isLoading } = useContext(RestaurantsContext);
 
   const context = useContext(FavoritesContext);
-  console.log(context.favorites.length);
+  
   return (
     <RestaurantScreenContainer>
       <Search favoritesContext={context} />

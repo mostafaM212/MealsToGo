@@ -1,4 +1,5 @@
-import { locations } from "./locationMock";
+import { locations } from "../../functions/geocode/geocodeMock";
+
 import camelize from 'camelize';
 
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createContext } from "react";
-import { locations } from "./locationMock";
+import { locations } from "../../functions/geocode/geocodeMock";
 import { locationRequest, locationTransform } from "./locationService";
 
 export const LocationContext = createContext();
